@@ -1,0 +1,53 @@
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+
+  <changeSet author="andresbustamante" id="init-users">
+    <createTable tableName="t_user">
+      <column name="id" type="BIGINT">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="pk_user"/>
+      </column>
+      <column name="first_name" type="VARCHAR(255)">
+        <constraints nullable="false" />
+      </column>
+      <column name="surname" type="VARCHAR(255)">
+        <constraints nullable="false" />
+      </column>
+      <column name="gender" type="VARCHAR(15)">
+        <constraints nullable="false" />
+      </column>
+      <column name="email" type="VARCHAR(50)">
+        <constraints nullable="false" unique="true" uniqueConstraintName="uc_user_email" />
+      </column>
+      <column name="active" type="BIT">
+        <constraints nullable="false" />
+      </column>
+      <column name="created_by" type="VARCHAR(50)">
+        <constraints nullable="false" />
+      </column>
+      <column name="created_at" type="TIMESTAMP">
+        <constraints nullable="false" />
+      </column>
+      <column name="modified_by" type="VARCHAR(50)"/>
+      <column name="modified_at" type="TIMESTAMP"/>
+      <column name="version" type="INT">
+        <constraints nullable="false" />
+      </column>
+    </createTable>
+
+    <createSequence sequenceName="s_user" incrementBy="1" startValue="1" />
+
+    <insert tableName="t_user">
+      <column name="id" valueSequenceNext="s_user" />
+      <column name="first_name" value="System" />
+      <column name="surname" value="Admin" />
+      <column name="gender" value="OTHER" />
+      <column name="email" value="sysadmin@email.com" />
+      <column name="active" valueNumeric="1" />
+      <column name="created_by" value="sysadmin@email.com" />
+      <column name="created_at" valueDate="2022-02-26 12:13:14" />
+      <column name="version" valueNumeric="0" />
+    </insert>
+  </changeSet>
+</databaseChangeLog>

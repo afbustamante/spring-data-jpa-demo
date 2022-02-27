@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.5.10</version>
+    <relativePath/> <!-- lookup parent from repository -->
+  </parent>
+
+  <groupId>net.andresbustamante</groupId>
+  <artifactId>spring-data-jpa-demo</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>spring-data-jpa-demo</name>
+  <description>Demo project for Spring Boot and Spring Data</description>
+  <packaging>pom</packaging>
+
+  <modules>
+    <module>myproject-api</module>
+    <module>myproject-core</module>
+    <module>myproject-web</module>
+    <module>myproject-db</module>
+  </modules>
+
+  <properties>
+    <java.version>14</java.version>
+    <junit-jupiter.version>5.8.2</junit-jupiter.version>
+
+    <maven-surefire-plugin.version>2.22.0</maven-surefire-plugin.version>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${maven-surefire-plugin.version}</version>
+        <dependencies>
+          <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit-jupiter.version}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
