@@ -4,12 +4,12 @@ Demo project using Spring Data JPA on Spring Boot. It is about an authorization 
 
 This project uses:
 
-- Spring Boot 2.5
-- Spring Data JPA
+- Spring Boot 2.7
+- Spring Data JPA 2.7
 - Spring Framework 5.3
-- Liquibase 4.3
-- Embedded HSQLDB / H2 database
-- Built on Maven
+- Liquibase 4.9
+- Embedded HSQLDB
+- Built-on Maven
 
 It requires Java 14.
 

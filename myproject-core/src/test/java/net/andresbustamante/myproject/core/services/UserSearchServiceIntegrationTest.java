@@ -11,7 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.transaction.Transactional;
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -36,7 +36,7 @@ class UserSearchServiceIntegrationTest {
         assertTrue(user.isActive());
         assertEquals(GenderEnum.OTHER, user.getGender());
         assertEquals("Admin", user.getSurname());
-        assertTrue(user.getCreationDate().isBefore(LocalDateTime.now()));
+        assertTrue(user.getCreationDate().isBefore(Instant.now()));
         assertNotNull(user.getRoles());
         assertTrue(user.getRoles().stream().anyMatch(r -> r.getName().equals("Admin")));
     }
