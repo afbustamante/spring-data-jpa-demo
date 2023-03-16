@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ContextConfiguration(classes = CoreTestConfig.class)
 @ExtendWith(SpringExtension.class)
-class UserManagementServiceIntegrationTest {
+class UserManagementServiceIT {
 
     @Autowired
     private UserManagementService userManagementService;

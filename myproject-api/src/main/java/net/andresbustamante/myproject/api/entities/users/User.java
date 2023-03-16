@@ -39,6 +39,10 @@ public class User extends AbstractEntity {
 
     private boolean active;
 
+    public User(final long id) {
+        this.id = id;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
