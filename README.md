@@ -2,13 +2,17 @@
 
 Demo project using Spring Data JPA on Spring Boot. It is about an authorization system using users and roles stored in database.
 
+Here it is the database model of this application:
+
+![](misc/db/db-diagram.jpg)
+
 This project uses:
 
 - Spring Boot 2.7
 - Spring Data JPA 2.7
 - Spring Framework 5.3
 - Liquibase 4.9
-- Embedded HSQLDB
+- Embedded H2 Database
 - Built-on Maven
 
 It requires Java 14.

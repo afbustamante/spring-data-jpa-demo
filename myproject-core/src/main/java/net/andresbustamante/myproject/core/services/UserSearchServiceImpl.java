@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class UserSearchServiceImpl implements UserSearchService {
 
@@ -22,5 +24,11 @@ public class UserSearchServiceImpl implements UserSearchService {
     @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
     public User loadUser(Long id) {
         return userRepository.getById(id);
+    }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
+    public List<User> findUsers() {
+        return userRepository.findAll();
     }
 }

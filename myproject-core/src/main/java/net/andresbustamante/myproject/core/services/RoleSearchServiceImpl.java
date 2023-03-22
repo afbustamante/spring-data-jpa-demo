@@ -23,6 +23,12 @@ public class RoleSearchServiceImpl implements RoleSearchService {
     @Override
     @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
     public List<Role> findRoles() {
-        return roleRepository.findAll();
+        return roleRepository.findActiveRoles();
+    }
+
+    @Override
+    @Transactional(readOnly = true, propagation = Propagation.REQUIRED)
+    public Role loadRole(Short id) {
+        return roleRepository.findById(id).orElse(null);
     }
 }

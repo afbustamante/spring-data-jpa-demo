@@ -8,17 +8,18 @@ import net.andresbustamante.myproject.api.enums.GenderEnum;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "T_USER")
+@Table(name = "t_users")
 @Getter @Setter @NoArgsConstructor
-public class User extends AbstractEntity {
+public class User extends AbstractEntity implements Serializable {
 
     @Id
-    @SequenceGenerator(name = "s_user", sequenceName = "s_user", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "s_user")
+    @SequenceGenerator(name = "s_users", sequenceName = "s_users", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "s_users")
     private Long id;
 
     @NotNull
@@ -28,7 +29,7 @@ public class User extends AbstractEntity {
     private String surname;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "T_USER_ROLE", inverseJoinColumns = @JoinColumn(name = "ROLE_ID"), joinColumns = @JoinColumn(name = "USER_ID"))
+    @JoinTable(name = "t_user_roles", inverseJoinColumns = @JoinColumn(name = "role_id"), joinColumns = @JoinColumn(name = "user_id"))
     private Set<Role> roles;
 
     @Enumerated(EnumType.STRING)

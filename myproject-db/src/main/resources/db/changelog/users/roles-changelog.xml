@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
 
   <changeSet id="init-roles" author="andresbustamante">
-    <createTable tableName="t_role">
+    <createTable tableName="t_roles">
       <column name="id" type="SMALLINT">
         <constraints nullable="false" primaryKey="true" primaryKeyName="pk_role"/>
       </column>
@@ -27,7 +27,7 @@
       </column>
     </createTable>
 
-    <insert tableName="t_role">
+    <insert tableName="t_roles">
       <column name="id" valueNumeric="1"/>
       <column name="name" value="Admin"/>
       <column name="active" valueNumeric="1"/>
@@ -35,7 +35,7 @@
       <column name="created_at" valueDate="2022-02-26 12:13:14"/>
       <column name="version" valueNumeric="0"/>
     </insert>
-    <insert tableName="t_role">
+    <insert tableName="t_roles">
       <column name="id" valueNumeric="2"/>
       <column name="name" value="Salesman"/>
       <column name="active" valueNumeric="1"/>
@@ -43,7 +43,7 @@
       <column name="created_at" valueDate="2022-02-26 12:13:14"/>
       <column name="version" valueNumeric="0"/>
     </insert>
-    <insert tableName="t_role">
+    <insert tableName="t_roles">
       <column name="id" valueNumeric="3"/>
       <column name="name" value="Manager"/>
       <column name="active" valueNumeric="1"/>

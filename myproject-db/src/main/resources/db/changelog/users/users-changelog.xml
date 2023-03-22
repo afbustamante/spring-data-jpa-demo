@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
 
   <changeSet author="andresbustamante" id="init-users">
-    <createTable tableName="t_user">
+    <createTable tableName="t_users">
       <column name="id" type="BIGINT">
         <constraints nullable="false" primaryKey="true" primaryKeyName="pk_user"/>
       </column>
@@ -36,10 +36,10 @@
       </column>
     </createTable>
 
-    <createSequence sequenceName="s_user" incrementBy="1" startValue="1" />
+    <createSequence sequenceName="s_users" incrementBy="1" startValue="1" />
 
-    <insert tableName="t_user">
-      <column name="id" valueSequenceNext="s_user" />
+    <insert tableName="t_users">
+      <column name="id" valueSequenceNext="s_users" />
       <column name="first_name" value="System" />
       <column name="surname" value="Admin" />
       <column name="gender" value="OTHER" />
