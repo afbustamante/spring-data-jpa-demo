@@ -37,7 +37,7 @@ public class ImportUsersBatchConfig {
                         setNames(new String[] { "first_name", "surname", "email", "gender" });
                     }
                 });
-                //Set values in Employee class
+
                 setFieldSetMapper(new BeanWrapperFieldSetMapper<>() {
                     {
                         setTargetType(ImportedUser.class);
