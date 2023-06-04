@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/roles")
-public class RolesController {
+public class RolesController extends AbstractController {
 
     private final RolesService rolesService;
 
@@ -22,7 +22,8 @@ public class RolesController {
 
     @GetMapping(path = "")
     public ResponseEntity<List<Role>> findRoles() {
-        return ResponseEntity.ok(rolesService.findRoles());
+        List<Role> roles = rolesService.findRoles();
+        return ResponseEntity.ok(roles);
     }
 
     @GetMapping(path = "/{id}")

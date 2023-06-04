@@ -15,6 +15,7 @@
     <module>myproject-core</module>
     <module>myproject-web</module>
     <module>myproject-db</module>
+    <module>myproject-batch</module>
   </modules>
 
   <properties>

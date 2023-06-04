@@ -5,5 +5,5 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(path = "/users")
-public class UsersController {
+public class UsersController extends AbstractController {
 }

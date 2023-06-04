@@ -11,7 +11,7 @@
       <column name="name" type="VARCHAR(50)">
         <constraints nullable="false" />
       </column>
-      <column name="active" type="BIT">
+      <column name="active" type="BOOL">
         <constraints nullable="false" />
       </column>
       <column name="created_by" type="VARCHAR(50)">
@@ -30,7 +30,7 @@
     <insert tableName="t_roles">
       <column name="id" valueNumeric="1"/>
       <column name="name" value="Admin"/>
-      <column name="active" valueNumeric="1"/>
+      <column name="active" value="true"/>
       <column name="created_by" value="sysadmin@email.com"/>
       <column name="created_at" valueDate="2022-02-26 12:13:14"/>
       <column name="version" valueNumeric="0"/>
@@ -38,7 +38,7 @@
     <insert tableName="t_roles">
       <column name="id" valueNumeric="2"/>
       <column name="name" value="Salesman"/>
-      <column name="active" valueNumeric="1"/>
+      <column name="active" value="true"/>
       <column name="created_by" value="sysadmin@email.com"/>
       <column name="created_at" valueDate="2022-02-26 12:13:14"/>
       <column name="version" valueNumeric="0"/>
@@ -46,7 +46,7 @@
     <insert tableName="t_roles">
       <column name="id" valueNumeric="3"/>
       <column name="name" value="Manager"/>
-      <column name="active" valueNumeric="1"/>
+      <column name="active" value="true"/>
       <column name="created_by" value="sysadmin@email.com"/>
       <column name="created_at" valueDate="2022-02-26 12:13:14"/>
       <column name="version" valueNumeric="0"/>

@@ -1,6 +1,6 @@
 # spring-data-jpa-demo
 
-Demo project using Spring Data JPA on Spring Boot. It is about an authorization system using users and roles stored in database.
+Demo project using Spring Data JPA on Spring Boot. It shows a user management module storing users and roles in an SQL database.
 
 Here it is the database model of this application:
 
@@ -11,11 +11,12 @@ This project uses:
 - Spring Boot 2.7
 - Spring Data JPA 2.7
 - Spring Framework 5.3
+- Spring Batch 4.3
 - Liquibase 4.9
 - Embedded H2 Database
 - Built-on Maven
 
-It requires Java 14.
+It requires Java 14+.
 
 ## Spring Data JPA and Spring Boot
 
@@ -34,6 +35,7 @@ This project is separated into subprojects in order to keep best practices on la
 - *myproject-db*: Contains the scripts and dependencies needed to build the database
 - *myproject-core*: Contains the repositories and services implementations, it is, the business core of the application
 - *myproject-web*: Contains the Web controllers and the DTO definitions for the HTTP layer.
+- *myproject-batch*: Contains batch configuration and jobs
 
 ## Building and running this project
 
