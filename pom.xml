@@ -21,17 +21,19 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
-    <java.version>14</java.version>
+    <java.version>17</java.version>
 
-    <spring-boot.version>2.7.8</spring-boot.version>
-    <junit-jupiter.version>5.8.2</junit-jupiter.version>
-    <lombok.version>1.18.24</lombok.version>
+    <spring-boot.version>3.0.11</spring-boot.version>
+    <junit-jupiter.version>5.9.3</junit-jupiter.version>
+    <lombok.version>1.18.30</lombok.version>
+    <jakarta.el-api.version>4.0.0</jakarta.el-api.version>
+    <jakarta.el.version>4.0.2</jakarta.el.version>
 
-    <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
-    <maven-surefire-plugin.version>3.0.0-M7</maven-surefire-plugin.version>
-    <maven-failsafe-plugin.version>3.0.0-M8</maven-failsafe-plugin.version>
+    <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
+    <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
+    <maven-failsafe-plugin.version>3.1.2</maven-failsafe-plugin.version>
     <maven-site-plugin.version>3.12.1</maven-site-plugin.version>
-    <maven-project-info-reports-plugin.version>3.4.2</maven-project-info-reports-plugin.version>
+    <maven-project-info-reports-plugin.version>3.4.5</maven-project-info-reports-plugin.version>
   </properties>
 
   <distributionManagement>
@@ -50,6 +52,17 @@
         <version>${spring-boot.version}</version>
         <type>pom</type>
         <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>jakarta.el</groupId>
+        <artifactId>jakarta.el-api</artifactId>
+        <version>${jakarta.el-api.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.glassfish</groupId>
+        <artifactId>jakarta.el</artifactId>
+        <version>${jakarta.el.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

@@ -6,8 +6,8 @@ import lombok.Setter;
 import net.andresbustamante.myproject.api.entities.AbstractEntity;
 import net.andresbustamante.myproject.api.enums.GenderEnum;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.Set;

@@ -5,15 +5,18 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import net.andresbustamante.myproject.api.entities.AbstractEntity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+import org.springframework.data.annotation.Immutable;
+
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
 @Table(name = "t_roles")
+@Immutable
 @Getter @Setter @NoArgsConstructor
 public class Role extends AbstractEntity implements Serializable {
 

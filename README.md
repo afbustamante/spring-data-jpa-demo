@@ -8,15 +8,15 @@ Here it is the database model of this application:
 
 This project uses:
 
-- Spring Boot 2.7
-- Spring Data JPA 2.7
-- Spring Framework 5.3
-- Spring Batch 4.3
-- Liquibase 4.9
+- Spring Boot 3.0
+- Spring Data JPA 3.0
+- Spring Framework 6.0
+- Spring Batch 5.0
+- Liquibase 4.17
 - Embedded H2 Database
 - Built-on Maven
 
-It requires Java 14+.
+It requires Java 17+.
 
 ## Spring Data JPA and Spring Boot
 
