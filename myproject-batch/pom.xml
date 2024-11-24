@@ -29,6 +29,7 @@
             <groupId>net.andresbustamante</groupId>
             <artifactId>myproject-core</artifactId>
             <version>${project.version}</version>
+            <scope>runtime</scope>
         </dependency>
 
         <dependency>

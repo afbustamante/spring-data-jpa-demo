@@ -18,26 +18,34 @@ pipeline {
             steps {
                 // Get code from GitHub repository
                 echo 'Pulling branch ' + env.GIT_BRANCH
+                sh 'mvn clean'
             }
         }
         stage('Build') {
             steps {
-                // Run the maven build without tests
-                sh 'mvn clean install -DskipTests=true'
+                // Run the maven build
+                sh 'mvn compile'
             }
         }
-        stage('Test') {
+        stage('Test (UT)') {
             steps {
                 // Run the maven build with tests
-                sh 'mvn clean install --batch-mode --errors --fail-at-end'
+                sh 'mvn test'
             }
             post {
                 always {
                     junit '**/target/surefire-reports/TEST-*.xml'
-
-                    withChecks('Integration Tests') {
-                        junit '**/target/failsafe-reports/TEST-*.xml'
-                    }
+                }
+            }
+        }
+        stage('Test (IT)') {
+            steps {
+                // Run the maven build with integration tests
+                sh 'mvn verify'
+            }
+            post {
+                always {
+                    junit '**/target/failsafe-reports/TEST-*.xml'
                 }
             }
         }

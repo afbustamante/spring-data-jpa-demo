@@ -1,10 +1,11 @@
 package net.andresbustamante.myproject.web.config;
 
-import net.andresbustamante.myproject.core.util.UserContext;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+
+import net.andresbustamante.myproject.api.util.UserContext;
 
 @Component
 public class WebUserContext implements UserContext {

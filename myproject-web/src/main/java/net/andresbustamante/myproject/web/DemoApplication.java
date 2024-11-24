@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan(basePackages = "net.andresbustamante.myproject")
-@EntityScan(basePackages = "net.andresbustamante.myproject.api.entities")
+@EntityScan(basePackages = "net.andresbustamante.myproject.core.entities")
 public class DemoApplication {
 
     public static void main(String[] args) {

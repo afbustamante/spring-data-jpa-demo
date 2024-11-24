@@ -1,22 +1,21 @@
 # spring-data-jpa-demo
 
-Demo project using Spring Data JPA on Spring Boot. It shows a user management module storing users and roles in an SQL database.
+Demo project using Spring Data JPA on Spring Boot. It works using the Sakila sample database structure from MySQL.
 
-Here it is the database model of this application:
-
-![](misc/db/db-diagram.jpg)
+Here it is the [database model](https://dev.mysql.com/doc/sakila/en/sakila-structure.html) of this application.
 
 This project uses:
 
-- Spring Boot 3.0
-- Spring Data JPA 3.0
-- Spring Framework 6.0
-- Spring Batch 5.0
-- Liquibase 4.17
-- Embedded H2 Database
+- Spring Boot 3.2
+- Spring Data JPA 3.1
+- Spring Framework 6.1
+- Spring Batch 5.1
+- Flyway 9.22 (only for MySQL)
+- Embedded H2 Database 2.2
 - Built-on Maven
 
-It requires Java 17+.
+It requires Java 17+ and optionally a MySQL Server 8.0+ in order to deploy the application with the "mysql" Spring 
+profile.
 
 ## Spring Data JPA and Spring Boot
 
@@ -31,9 +30,9 @@ This project contains some examples about:
 
 This project is separated into subprojects in order to keep best practices on layers in Spring:
 
-- *myproject-api*: Contains entities, enums and services declarations
+- *myproject-api*: Contains model, enums and services declarations
 - *myproject-db*: Contains the scripts and dependencies needed to build the database
-- *myproject-core*: Contains the repositories and services implementations, it is, the business core of the application
+- *myproject-core*: Contains the entities, repositories and services implementations, it is, the business core of the application
 - *myproject-web*: Contains the Web controllers and the DTO definitions for the HTTP layer.
 - *myproject-batch*: Contains batch configuration and jobs
 

@@ -1,10 +1,11 @@
 package net.andresbustamante.myproject.core.config;
 
-import net.andresbustamante.myproject.core.util.UserContext;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.AuditorAware;
 
-import java.util.Optional;
+import net.andresbustamante.myproject.api.util.UserContext;
 
 public class JpaAuditorAware implements AuditorAware<String> {
 
