@@ -13,7 +13,9 @@ import lombok.Setter;
 public class StaffDto extends PersonDto {
 
     private Integer id;
+
     private String email;
+
     private String username;
 
     @JsonIgnore
@@ -23,4 +25,6 @@ public class StaffDto extends PersonDto {
     private Instant lastUpdate;
 
     private boolean active;
+
+    private AddressDto address;
 }
