@@ -20,7 +20,7 @@ public class Actor extends Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "staff_id", nullable = false)
+    @Column(name = "actor_id", nullable = false)
     private Short id;
 
     @Column(name = "last_update", nullable = false)
