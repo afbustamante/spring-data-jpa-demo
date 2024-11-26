@@ -21,4 +21,6 @@ public class AddressDto {
     private String city;
 
     private String country;
+
+    private String phone;
 }
