@@ -1,6 +1,10 @@
 package net.andresbustamante.myproject.core.entities;
 
+import java.io.Serializable;
 import java.time.Instant;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,7 +22,7 @@ import lombok.Setter;
 @Table(name = "city")
 @Getter
 @Setter
-public class City {
+public class City implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,16 +36,8 @@ public class City {
     @JoinColumn(name = "country_id", nullable = false)
     private Country country;
 
+    @CreatedDate
+    @LastModifiedDate
     @Column(name = "last_update", nullable = false)
     private Instant lastUpdate;
-
-    public City() {
-        lastUpdate = Instant.now();
-    }
-
-    public City(final String name, final Country country) {
-        this();
-        this.name = name;
-        this.country = country;
-    }
 }

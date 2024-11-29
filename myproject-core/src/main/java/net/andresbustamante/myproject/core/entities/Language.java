@@ -2,6 +2,10 @@ package net.andresbustamante.myproject.core.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Objects;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,10 +28,28 @@ public class Language implements Serializable {
 
     @Size(max = 20)
     @NotNull
+    @Column(name = "name", unique = true)
     private String name;
 
+    @CreatedDate
+    @LastModifiedDate
     @NotNull
     @Column(name = "last_update")
     private Instant lastUpdate;
 
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Language language)) {
+            return false;
+        }
+        return Objects.equals(name, language.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
+    }
 }
