@@ -4,10 +4,10 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.Set;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import jakarta.persistence.Cacheable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,7 +21,7 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "country")
-@Cacheable
+@Cacheable(cacheNames = "countries")
 @Getter
 @Setter
 public class Country implements Serializable {
