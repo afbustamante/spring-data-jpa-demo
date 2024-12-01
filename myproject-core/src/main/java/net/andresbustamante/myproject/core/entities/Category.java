@@ -1,12 +1,7 @@
 package net.andresbustamante.myproject.core.entities;
 
-import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
-
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,23 +9,27 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "language")
-@Cacheable(cacheNames = "languages")
+@Table(name = "category")
+@Cacheable(cacheNames = "categories")
 @Getter
 @Setter
-public class Language implements Serializable {
+public class Category {
 
     @Id
-    @Column(name = "language_id")
+    @Column(name = "category_id", nullable = false)
     private Short id;
 
-    @Size(max = 20)
+    @Size(max = 25)
     @NotNull
-    @Column(name = "name", unique = true)
     private String name;
 
     @CreatedDate
@@ -44,10 +43,11 @@ public class Language implements Serializable {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Language language)) {
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        return Objects.equals(name, language.name);
+        Category category = (Category) o;
+        return Objects.equals(name, category.name);
     }
 
     @Override

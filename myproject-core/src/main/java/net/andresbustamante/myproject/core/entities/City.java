@@ -3,6 +3,7 @@ package net.andresbustamante.myproject.core.entities;
 import java.io.Serializable;
 import java.time.Instant;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -20,6 +21,7 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "city")
+@Cacheable(cacheNames = "cities")
 @Getter
 @Setter
 public class City implements Serializable {

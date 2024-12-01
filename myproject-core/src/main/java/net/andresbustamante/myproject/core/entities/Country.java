@@ -2,6 +2,7 @@ package net.andresbustamante.myproject.core.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Objects;
 import java.util.Set;
 
 import org.springframework.cache.annotation.Cacheable;
@@ -41,4 +42,21 @@ public class Country implements Serializable {
 
     @OneToMany(mappedBy = "country")
     private Set<City> cities;
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Country country = (Country) o;
+        return Objects.equals(name, country.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
+    }
 }
