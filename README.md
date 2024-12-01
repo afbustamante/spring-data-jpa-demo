@@ -14,8 +14,9 @@ This project uses:
 - Embedded H2 Database 2.2
 - Built-on Maven
 
-It requires Java 17+ and optionally a MySQL Server 8.0+ in order to deploy the application with the "mysql" Spring 
-profile.
+It requires Java 17+ and optionally a MariaDB Server 10+ / MySQL Server 8.0+ in order to deploy the application with a
+database server. You must use one of the Spring profiles available for these servers: `mysql` to start with a MySQL
+database or `mariadb` to start with a MariaDB database.
 
 ## Spring Data JPA and Spring Boot
 

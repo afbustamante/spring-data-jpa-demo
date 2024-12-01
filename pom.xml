@@ -32,6 +32,7 @@
     <hibernate-validator.version>8.0.1.Final</hibernate-validator.version>
     <mapstruct.version>1.6.3</mapstruct.version>
     <mysql-connector.version>9.1.0</mysql-connector.version>
+    <mariadb-java-client.version>3.5.1</mariadb-java-client.version>
 
     <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
     <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
@@ -88,10 +89,16 @@
         </exclusions>
       </dependency>
 
+      <!-- Database -->
       <dependency>
         <groupId>com.mysql</groupId>
         <artifactId>mysql-connector-j</artifactId>
         <version>${mysql-connector.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.mariadb.jdbc</groupId>
+        <artifactId>mariadb-java-client</artifactId>
+        <version>${mariadb-java-client.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

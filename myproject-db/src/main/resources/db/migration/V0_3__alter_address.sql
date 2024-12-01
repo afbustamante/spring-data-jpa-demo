@@ -1,1 +1,1 @@
-ALTER TABLE address DROP location;
+/*!50705 ALTER TABLE address DROP location;*/
