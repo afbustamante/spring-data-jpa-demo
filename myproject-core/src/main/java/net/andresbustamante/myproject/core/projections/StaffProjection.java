@@ -8,8 +8,8 @@ public interface StaffProjection {
     String getUsername();
     String getEmail();
     boolean isActive();
-    String getAddress1();
-    String getAddress2();
+    String getAddressLine1();
+    String getAddressLine2();
     String getPostalCode();
     String getCity();
     String getCountry();

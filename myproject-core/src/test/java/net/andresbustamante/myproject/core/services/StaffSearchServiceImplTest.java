@@ -29,14 +29,14 @@ class StaffSearchServiceImplTest {
 
     @Test
     void testFetchActiveStaff() {
-        when(staffDao.findAllByActiveTrue()).thenReturn(new ArrayList<>());
+        when(staffDao.findAllActiveStaff()).thenReturn(new ArrayList<>());
         when(staffMapper.map(any(Collection.class))).thenReturn(new ArrayList<>());
 
         var result = staffSearchService.fetchActiveStaff();
 
         assertNotNull(result);
 
-        verify(staffDao).findAllByActiveTrue();
+        verify(staffDao).findAllActiveStaff();
         verify(staffMapper).map(any(Collection.class));
     }
 }

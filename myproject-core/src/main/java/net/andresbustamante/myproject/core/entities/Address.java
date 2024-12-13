@@ -8,6 +8,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -30,15 +31,15 @@ public class Address implements Serializable {
     private Short id;
 
     @Column(name = "address", nullable = false)
-    private String address;
+    private String line1;
 
     @Column(name = "address2")
-    private String address2;
+    private String line2;
 
     @Column(name = "district", nullable = false)
     private String district;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "city_id")
     private City city;
 

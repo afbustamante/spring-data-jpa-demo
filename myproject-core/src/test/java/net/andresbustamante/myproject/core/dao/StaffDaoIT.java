@@ -18,7 +18,7 @@ class StaffDaoIT {
 
     @Test
     void testFindAllByActiveTrue() {
-        var staff = staffDao.findAllByActiveTrue();
+        var staff = staffDao.findAllActiveStaff();
 
         assertNotNull(staff);
     }

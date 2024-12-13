@@ -25,8 +25,8 @@ public class AddressManagementServiceImpl implements AddressManagementService {
     @Transactional
     public short createAddress(final AddressCreationDto address) {
         Address newAddress = new Address();
-        newAddress.setAddress(address.line1());
-        newAddress.setAddress2(address.line2());
+        newAddress.setLine1(address.line1());
+        newAddress.setLine2(address.line2());
         newAddress.setPostalCode(address.postalCode());
         newAddress.setDistrict(address.district());
         newAddress.setPhone(address.phone());

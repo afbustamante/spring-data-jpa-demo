@@ -26,7 +26,7 @@ public class StaffSearchServiceImpl implements StaffSearchService {
 
     @Override
     public Collection<StaffDto> fetchActiveStaff() {
-        List<Staff> activeStaff = staffDao.findAllByActiveTrue();
+        List<Staff> activeStaff = staffDao.findAllActiveStaff();
         return staffMapper.map(activeStaff);
     }
 }
