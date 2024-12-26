@@ -6,12 +6,10 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,11 +21,17 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @Table(name = "film")
+@EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
 public class Film implements Serializable {
@@ -45,7 +49,7 @@ public class Film implements Serializable {
     private String description;
 
     @Column(name = "release_year")
-    private Integer releaseYear;
+    private Short releaseYear;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -70,7 +74,6 @@ public class Film implements Serializable {
     @Column(name = "replacement_cost", precision = 5, scale = 2)
     private BigDecimal replacementCost;
 
-    @Lob
     private String rating;
 
     @Lob
@@ -86,7 +89,11 @@ public class Film implements Serializable {
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "film")
     private List<FilmActor> filmActors;
 
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "film")
+    private List<FilmCategory> filmCategories;
+
     public Film() {
         filmActors = new ArrayList<>();
+        filmCategories = new ArrayList<>();
     }
 }

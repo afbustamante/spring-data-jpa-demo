@@ -16,27 +16,28 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class FilmActorId implements Serializable {
-
-    @Column(name = "actor_id", nullable = false)
-    private Short actorId;
+public class FilmCategoryId implements Serializable {
 
     @Column(name = "film_id", nullable = false)
     private Integer filmId;
+
+    @Column(name = "category_id", nullable = false)
+    private Byte categoryId;
 
     @Override
     public boolean equals(final Object o) {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof FilmActorId that)) {
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        return Objects.equals(actorId, that.actorId) && Objects.equals(filmId, that.filmId);
+        FilmCategoryId that = (FilmCategoryId) o;
+        return Objects.equals(filmId, that.filmId) && Objects.equals(categoryId, that.categoryId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(actorId, filmId);
+        return Objects.hash(filmId, categoryId);
     }
 }

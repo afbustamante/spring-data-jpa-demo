@@ -4,16 +4,15 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+
+import org.springframework.cache.annotation.Cacheable;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -33,8 +32,6 @@ public class Language implements Serializable {
     @Column(name = "name", unique = true)
     private String name;
 
-    @CreatedDate
-    @LastModifiedDate
     @NotNull
     @Column(name = "last_update")
     private Instant lastUpdate;

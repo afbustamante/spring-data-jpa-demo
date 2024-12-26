@@ -5,10 +5,6 @@ import java.time.Instant;
 import java.util.Objects;
 import java.util.Set;
 
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,6 +12,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+
+import org.springframework.cache.annotation.Cacheable;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -32,11 +30,9 @@ public class Country implements Serializable {
     @Column(name = "country_id", nullable = false)
     private Short id;
 
-    @Column(name = "country", nullable = false)
+    @Column(name = "country", nullable = false, unique = true)
     private String name;
 
-    @CreatedDate
-    @LastModifiedDate
     @Column(name = "last_update", nullable = false)
     private Instant lastUpdate;
 

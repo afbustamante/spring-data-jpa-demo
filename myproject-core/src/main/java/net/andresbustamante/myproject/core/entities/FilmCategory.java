@@ -5,33 +5,39 @@ import java.time.Instant;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "category")
-@Cacheable(cacheNames = "categories")
+@Table(name = "film_category")
+@EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
-public class Category implements Serializable {
+public class FilmCategory implements Serializable {
 
-    @Id
-    @Column(name = "category_id", nullable = false)
-    private Byte id;
+    @EmbeddedId
+    private FilmCategoryId id;
 
-    @Size(max = 25)
-    @NotNull
-    private String name;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "film_id", insertable = false, updatable = false)
+    private Film film;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", insertable = false, updatable = false)
+    private Category category;
 
     @CreatedDate
     @LastModifiedDate
@@ -47,12 +53,12 @@ public class Category implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Category category = (Category) o;
-        return Objects.equals(name, category.name);
+        FilmCategory that = (FilmCategory) o;
+        return Objects.equals(id, that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name);
+        return Objects.hash(id);
     }
 }

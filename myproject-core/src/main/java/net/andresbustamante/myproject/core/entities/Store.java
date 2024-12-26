@@ -1,13 +1,16 @@
 package net.andresbustamante.myproject.core.entities;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.Set;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -19,9 +22,10 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "store")
+@EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
-public class Store {
+public class Store implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
