@@ -17,6 +17,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Size;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -33,17 +34,22 @@ public class Staff extends Person {
     @Column(name = "staff_id", nullable = false)
     private Short id;
 
+    @Size(max = 50)
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
     @Column(name = "active", nullable = false)
     private boolean active;
 
+    @Size(max = 16)
     @Column(name = "username", nullable = false, unique = true)
     private String username;
 
+    @Size(max = 40)
     @Column(name = "password", nullable = false)
     private String password;
+
+    private byte[] picture;
 
     @CreatedDate
     @LastModifiedDate
