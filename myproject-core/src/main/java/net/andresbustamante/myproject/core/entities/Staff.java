@@ -45,7 +45,7 @@ public class Staff extends Person {
     @Column(name = "username", nullable = false, unique = true)
     private String username;
 
-    @Size(max = 40)
+    @Size(max = 64)
     @Column(name = "password", nullable = false)
     private String password;
 

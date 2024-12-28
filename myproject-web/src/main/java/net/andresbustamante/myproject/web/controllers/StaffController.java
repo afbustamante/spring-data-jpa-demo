@@ -19,7 +19,7 @@ import net.andresbustamante.myproject.web.dto.StaffForm;
 import net.andresbustamante.myproject.web.mappers.StaffFormMapper;
 
 @RestController
-@RequestMapping("/staff")
+@RequestMapping("/api/staff")
 public class StaffController extends AbstractController {
 
     private final StaffSearchService staffSearchService;
@@ -42,6 +42,6 @@ public class StaffController extends AbstractController {
     public ResponseEntity<Void> createStaff(@RequestBody @Valid StaffForm staffForm) {
         short staffId = staffManagementService.createStaff(staffFormMapper.map(staffForm));
 
-        return ResponseEntity.created(URI.create(String.format("/staff/%d", staffId))).build();
+        return ResponseEntity.created(URI.create(String.format("/api/staff/%d", staffId))).build();
     }
 }

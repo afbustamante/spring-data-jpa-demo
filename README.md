@@ -10,7 +10,7 @@ This project uses:
 - Spring Data JPA 3.1
 - Spring Framework 6.1
 - Spring Batch 5.1
-- Flyway 9.22 (only for MySQL)
+- Flyway 9.22 (only for MySQL and MariaDB)
 - Embedded H2 Database 2.2
 - Built-on Maven
 
@@ -43,6 +43,6 @@ In order to build this project for the first time, use the following command:
 
     $ ./mvnw clean install
   
- After that, you can run the Spring Boot application using the following command:
+ After that, you can run the Spring Boot Web application using the following command:
  
     $ java -jar myproject-web/target/myproject-web.jar

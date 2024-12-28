@@ -15,7 +15,7 @@ import net.andresbustamante.myproject.api.model.CountryDto;
 import net.andresbustamante.myproject.api.services.GeographySearchService;
 
 @RestController
-@RequestMapping("/countries")
+@RequestMapping("/api/countries")
 public class CountriesController {
 
     private final GeographySearchService geographySearchService;
