@@ -12,6 +12,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
+import jakarta.validation.constraints.NotNull;
 
 import org.springframework.cache.annotation.Cacheable;
 
@@ -19,7 +21,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "country")
+@Table(name = "country", uniqueConstraints = {
+        @UniqueConstraint(name = "uc_country_name", columnNames = "country")
+})
 @Cacheable(cacheNames = "countries")
 @Getter
 @Setter
@@ -30,7 +34,8 @@ public class Country implements Serializable {
     @Column(name = "country_id", nullable = false)
     private Short id;
 
-    @Column(name = "country", nullable = false, unique = true)
+    @NotNull
+    @Column(name = "country")
     private String name;
 
     @Column(name = "last_update", nullable = false)

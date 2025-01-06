@@ -1,6 +1,9 @@
 package net.andresbustamante.myproject.core.entities;
 
 import java.time.Instant;
+import java.util.LinkedHashSet;
+import java.util.Objects;
+import java.util.Set;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -15,15 +18,21 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "staff")
+@Table(name = "staff", uniqueConstraints = {
+        @UniqueConstraint(name = "uc_staff_email", columnNames = "email"),
+        @UniqueConstraint(name = "uc_staff_username", columnNames = "username")
+})
 @EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
@@ -35,18 +44,18 @@ public class Staff extends Person {
     private Short id;
 
     @Size(max = 50)
-    @Column(name = "email", nullable = false, unique = true)
+    @NotNull
     private String email;
 
-    @Column(name = "active", nullable = false)
+    @NotNull
     private boolean active;
 
     @Size(max = 16)
-    @Column(name = "username", nullable = false, unique = true)
+    @NotNull
     private String username;
 
     @Size(max = 64)
-    @Column(name = "password", nullable = false)
+    @NotNull
     private String password;
 
     private byte[] picture;
@@ -64,7 +73,28 @@ public class Staff extends Person {
     @JoinColumn(name = "store_id", nullable = false)
     private Store store;
 
+    @OneToMany(mappedBy = "staff")
+    private Set<Rental> rentals;
+
     public Staff() {
         active = true;
+        rentals = new LinkedHashSet<>();
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Staff staff = (Staff) o;
+        return Objects.equals(username, staff.username);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(username);
     }
 }

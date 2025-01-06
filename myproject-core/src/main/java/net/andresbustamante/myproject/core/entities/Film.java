@@ -3,8 +3,9 @@ package net.andresbustamante.myproject.core.entities;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Objects;
+import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -19,7 +20,9 @@ import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 import org.springframework.data.annotation.CreatedDate;
@@ -30,7 +33,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "film")
+@Table(name = "film", uniqueConstraints = {
+        @UniqueConstraint(name = "uc_film_title_year", columnNames = {"title", "release_year", "length"})
+})
 @EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
@@ -74,6 +79,7 @@ public class Film implements Serializable {
     @Column(name = "replacement_cost", precision = 5, scale = 2)
     private BigDecimal replacementCost;
 
+    @Pattern(regexp = "^(G|PG|PG-13|R|NC-17)$", message = "Invalid rating")
     private String rating;
 
     @Lob
@@ -87,13 +93,30 @@ public class Film implements Serializable {
     private Instant lastUpdate;
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "film")
-    private List<FilmActor> filmActors;
+    private Set<FilmActor> filmActors;
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "film")
-    private List<FilmCategory> filmCategories;
+    private Set<FilmCategory> filmCategories;
 
     public Film() {
-        filmActors = new ArrayList<>();
-        filmCategories = new ArrayList<>();
+        filmActors = new LinkedHashSet<>();
+        filmCategories = new LinkedHashSet<>();
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Film film = (Film) o;
+        return Objects.equals(title, film.title) && Objects.equals(releaseYear, film.releaseYear);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, releaseYear);
     }
 }

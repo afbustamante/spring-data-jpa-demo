@@ -2,6 +2,7 @@ package net.andresbustamante.myproject.core.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.Objects;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -43,4 +44,17 @@ public class FilmActor implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "actor_id", insertable = false, updatable = false)
     private Actor actor;
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        FilmActor filmActor = (FilmActor) o;
+        return Objects.equals(id, filmActor.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

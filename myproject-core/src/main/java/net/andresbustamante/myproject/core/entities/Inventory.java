@@ -6,10 +6,6 @@ import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
@@ -18,42 +14,51 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "store")
+@Table(name = "inventory")
 @EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
-public class Store implements Serializable {
+public class Inventory implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "store_id", nullable = false)
-    private Short id;
+    @Column(name = "inventory_id", nullable = false)
+    private Integer id;
 
-    @OneToMany(mappedBy = "store")
-    private Set<Staff> staff;
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "film_id")
+    private Film film;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "manager_staff_id")
-    private Staff manager;
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "store_id")
+    private Store store;
 
     @CreatedDate
     @LastModifiedDate
-    @Column(name = "last_update", nullable = false)
+    @NotNull
+    @Column(name = "last_update")
     private Instant lastUpdate;
 
-    @OneToMany(mappedBy = "store")
-    private Set<Inventory> inventories;
+    @OneToMany(mappedBy = "inventory")
+    private Set<Rental> rentals;
 
-    public Store() {
-        inventories = new LinkedHashSet<>();
+    public Inventory() {
+        rentals = new LinkedHashSet<>();
     }
 
     @Override
@@ -64,8 +69,8 @@ public class Store implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Store store = (Store) o;
-        return Objects.equals(id, store.id);
+        Inventory inventory = (Inventory) o;
+        return Objects.equals(id, inventory.id);
     }
 
     @Override

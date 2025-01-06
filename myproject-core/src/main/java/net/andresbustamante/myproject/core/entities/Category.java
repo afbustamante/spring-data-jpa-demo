@@ -8,6 +8,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -19,7 +20,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "category")
+@Table(name = "category", uniqueConstraints = {
+        @UniqueConstraint(name = "uc_category_name", columnNames = "name")
+})
 @Cacheable(cacheNames = "categories")
 @Getter
 @Setter

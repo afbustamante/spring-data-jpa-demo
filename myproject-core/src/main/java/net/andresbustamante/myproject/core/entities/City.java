@@ -18,12 +18,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "city")
+@Table(name = "city", uniqueConstraints = {
+        @UniqueConstraint(name = "uc_city_country", columnNames = {"country_id", "city"})
+})
 @EntityListeners(AuditingEntityListener.class)
 @Cacheable(cacheNames = "cities")
 @Getter
