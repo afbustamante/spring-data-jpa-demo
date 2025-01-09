@@ -28,6 +28,7 @@
     <lombok.version>1.18.36</lombok.version>
     <jakarta.el-api.version>4.0.0</jakarta.el-api.version>
     <jakarta.el.version>4.0.2</jakarta.el.version>
+    <commons-collections.version>4.4</commons-collections.version>
     <hibernate-core.version>6.4.10.Final</hibernate-core.version>
     <hibernate-validator.version>8.0.1.Final</hibernate-validator.version>
     <mapstruct.version>1.6.3</mapstruct.version>
@@ -60,6 +61,7 @@
         <scope>import</scope>
       </dependency>
 
+      <!-- Jakarta EE -->
       <dependency>
         <groupId>jakarta.el</groupId>
         <artifactId>jakarta.el-api</artifactId>
@@ -69,6 +71,13 @@
         <groupId>org.glassfish</groupId>
         <artifactId>jakarta.el</artifactId>
         <version>${jakarta.el.version}</version>
+      </dependency>
+
+      <!-- Apache Commons -->
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-collections4</artifactId>
+        <version>${commons-collections.version}</version>
       </dependency>
 
       <dependency>
