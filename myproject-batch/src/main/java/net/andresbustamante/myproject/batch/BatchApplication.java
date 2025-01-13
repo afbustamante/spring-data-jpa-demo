@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan(basePackages = "net.andresbustamante.myproject")
-@EntityScan(basePackages = "net.andresbustamante.myproject.api.entities")
+@EntityScan(basePackages = "net.andresbustamante.myproject.core.entities")
 @EnableBatchProcessing
 public class BatchApplication {
     public static void main(String[] args) {
