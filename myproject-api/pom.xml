@@ -10,6 +10,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>myproject-api</artifactId>
+    <name>My Project - API definition</name>
+    <description>Classes and interfaces to implement in the application</description>
 
     <dependencies>
         <dependency>

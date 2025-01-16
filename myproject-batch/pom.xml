@@ -10,6 +10,8 @@
     </parent>
 
     <artifactId>myproject-batch</artifactId>
+    <name>My Project - Batch application</name>
+    <description>Batch application executing data processing</description>
 
     <properties>
     </properties>

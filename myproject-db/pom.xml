@@ -10,6 +10,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>myproject-db</artifactId>
+    <name>My Project - Database definition</name>
+    <description>Libraries and migration files to use to build the database on a database server using Flyway</description>
 
     <dependencies>
         <dependency>
