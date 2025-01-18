@@ -6,11 +6,11 @@ Here it is the [database model](https://dev.mysql.com/doc/sakila/en/sakila-struc
 
 This project uses:
 
-- Spring Boot 3.2
-- Spring Data JPA 3.1
+- Spring Boot 3.3
+- Spring Data JPA 3.3
 - Spring Framework 6.1
 - Spring Batch 5.1
-- Flyway 9.22 (only for MySQL and MariaDB)
+- Flyway 10.10 (only for MySQL and MariaDB)
 - Embedded H2 Database 2.2
 - Built-on Maven
 

@@ -23,15 +23,16 @@
     <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
     <java.version>17</java.version>
 
-    <spring-boot.version>3.2.12</spring-boot.version>
+    <spring-boot.version>3.3.7</spring-boot.version>
     <junit-jupiter.version>5.10.5</junit-jupiter.version>
     <lombok.version>1.18.36</lombok.version>
     <jakarta.el-api.version>4.0.0</jakarta.el-api.version>
     <jakarta.el.version>4.0.2</jakarta.el.version>
     <commons-collections.version>4.4</commons-collections.version>
-    <hibernate-core.version>6.4.10.Final</hibernate-core.version>
-    <hibernate-validator.version>8.0.1.Final</hibernate-validator.version>
+    <hibernate-core.version>6.5.3.Final</hibernate-core.version>
+    <hibernate-validator.version>8.0.2.Final</hibernate-validator.version>
     <mapstruct.version>1.6.3</mapstruct.version>
+    <logback.version>1.5.16</logback.version>
 
     <!-- Database -->
     <mysql-connector.version>9.1.0</mysql-connector.version>
@@ -66,6 +67,17 @@
         <version>${spring-boot.version}</version>
         <type>pom</type>
         <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-test</artifactId>
+        <version>${spring-boot.version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>org.xmlunit</groupId>
+            <artifactId>xmlunit-core</artifactId>
+          </exclusion>
+        </exclusions>
       </dependency>
 
       <!-- Jakarta EE -->
@@ -115,6 +127,18 @@
         <groupId>org.mariadb.jdbc</groupId>
         <artifactId>mariadb-java-client</artifactId>
         <version>${mariadb-java-client.version}</version>
+      </dependency>
+
+      <!-- Logging -->
+      <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-core</artifactId>
+        <version>${logback.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <version>${logback.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
