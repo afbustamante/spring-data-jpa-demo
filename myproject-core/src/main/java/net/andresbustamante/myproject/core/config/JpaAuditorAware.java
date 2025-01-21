@@ -2,18 +2,18 @@ package net.andresbustamante.myproject.core.config;
 
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.AuditorAware;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+
+import net.andresbustamante.myproject.api.util.UserContext;
 
 public class JpaAuditorAware implements AuditorAware<String> {
 
-    public static final String ANONYMOUS_USER = "anonymous";
+    @Autowired
+    private UserContext context;
 
     @Override
     public Optional<String> getCurrentAuditor() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return authentication instanceof AnonymousAuthenticationToken ? Optional.of(ANONYMOUS_USER) : Optional.of(authentication.getName());
+        return (context.getUsername() != null) ? Optional.of(context.getUsername()) : Optional.empty();
     }
 }
