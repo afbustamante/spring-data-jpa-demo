@@ -29,7 +29,7 @@ public class AddressForm {
     private String district;
 
     @NotNull
-    private String phone;
+    private String phoneNumber;
 
     @NotNull
     @Min(1)

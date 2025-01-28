@@ -22,5 +22,6 @@ public class AddressDto {
 
     private String country;
 
-    private String phone;
+    @JsonProperty("phone_number")
+    private String phoneNumber;
 }

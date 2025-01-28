@@ -29,7 +29,7 @@ public class AddressManagementServiceImpl implements AddressManagementService {
         newAddress.setLine2(address.line2());
         newAddress.setPostalCode(address.postalCode());
         newAddress.setDistrict(address.district());
-        newAddress.setPhone(address.phone());
+        newAddress.setPhoneNumber(address.phoneNumber());
 
         City city = cityDao.getReferenceById(address.cityId());
         newAddress.setCity(city);

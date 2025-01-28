@@ -50,7 +50,8 @@ public class Address implements Serializable {
     @Column(name = "postal_code", nullable = false)
     private String postalCode;
 
-    private String phone;
+    @Column(name = "phone")
+    private String phoneNumber;
 
     @CreatedDate
     @LastModifiedDate
