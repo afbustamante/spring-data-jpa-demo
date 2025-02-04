@@ -1,0 +1,416 @@
+---
+openapi: 3.0.3
+
+info:
+  title: My Project
+  description: My Project's REST API
+  version: 1.0.0
+
+servers:
+  - url: 'http://localhost:8000/api'
+
+tags:
+  - name: categories
+  - name: cities
+  - name: countries
+  - name: films
+  - name: staff
+
+paths:
+  /categories:
+    get:
+      operationId: findCategories
+      tags:
+        - categories
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CategoryPage'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /countries:
+    get:
+      operationId: findCountries
+      tags:
+        - countries
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CountryPage'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /countries/{id}/cities:
+    get:
+      operationId: findCitiesByCountry
+      tags:
+        - countries
+        - cities
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CityPage'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /films:
+    get:
+      operationId: findFilms
+      parameters:
+        - name: title
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: year
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: rating
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/FilmRating'
+        - name: language
+          in: query
+          required: false
+          schema:
+            type: string
+      tags:
+        - films
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FilmPage'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /staff:
+    get:
+      operationId: findStaff
+      tags:
+        - staff
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StaffPage'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      operationId: createStaff
+      tags:
+        - staff
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StaffForm'
+      responses:
+        201:
+          description: Created
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /stores:
+    get:
+      operationId: findStores
+      tags:
+        - stores
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StorePage'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+security:
+  - basicAuth: []
+
+components:
+  schemas:
+    Address:
+      type: object
+      properties:
+        line_1:
+          type: string
+        line_2:
+          type: string
+        postal_code:
+          type: string
+        city:
+          type: string
+        country:
+          type: string
+        phone_number:
+          type: string
+
+    AddressForm:
+      type: object
+      properties:
+        line_1:
+          type: string
+        line_2:
+          type: string
+        postal_code:
+          type: string
+        district:
+          type: string
+        city_id:
+          type: integer
+        phone_number:
+          type: string
+      required:
+        - line_1
+        - postal_code
+        - city_id
+
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+
+    CategoryPage:
+      allOf:
+        - $ref: '#/components/schemas/Page'
+        - type: object
+          properties:
+            categories:
+              type: array
+              items:
+                $ref: '#/components/schemas/Category'
+
+    City:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+
+    CityPage:
+      allOf:
+        - $ref: '#/components/schemas/Page'
+        - type: object
+          properties:
+            cities:
+              type: array
+              items:
+                $ref: '#/components/schemas/City'
+
+    Country:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+
+    CountryPage:
+      allOf:
+        - $ref: '#/components/schemas/Page'
+        - type: object
+          properties:
+            countries:
+              type: array
+              items:
+                $ref: '#/components/schemas/Country'
+
+    ErrorResponse:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+        status:
+          type: integer
+        error:
+          type: string
+        message:
+          type: string
+        path:
+          type: string
+          format: uri
+
+    Film:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        release_year:
+          type: integer
+        length:
+          type: integer
+        rating:
+          $ref: '#/components/schemas/FilmRating'
+
+    FilmPage:
+      allOf:
+        - $ref: '#/components/schemas/Page'
+        - type: object
+          properties:
+            films:
+              type: array
+              items:
+                $ref: '#/components/schemas/Film'
+
+    FilmRating:
+      type: string
+      enum:
+        - G
+        - PG
+        - PG-13
+        - R
+        - NC-17
+
+    Page:
+      type: object
+      properties:
+        page:
+          type: integer
+        number_of_elements:
+          type: integer
+        total_elements:
+          type: integer
+
+    Person:
+      type: object
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+
+    Staff:
+      allOf:
+        - $ref: '#/components/schemas/Person'
+        - type: object
+          properties:
+            id:
+              type: integer
+            email:
+              type: string
+              format: email
+            active:
+              type: boolean
+            address:
+              $ref: '#/components/schemas/Address'
+
+    StaffForm:
+      type: object
+      properties:
+        first_name:
+          type: string
+          maxLength: 45
+        last_name:
+          type: string
+          maxLength: 45
+        username:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: base64
+        address:
+          $ref: '#/components/schemas/AddressForm'
+        store_id:
+          type: integer
+      required:
+        - first_name
+        - last_name
+        - username
+        - email
+
+    StaffPage:
+      allOf:
+        - $ref: '#/components/schemas/Page'
+        - type: object
+          properties:
+            staff:
+              type: array
+              items:
+                $ref: '#/components/schemas/Staff'
+
+    Store:
+      type: object
+      properties:
+        id:
+          type: integer
+        manager_name:
+          type: string
+
+    StorePage:
+      allOf:
+        - $ref: '#/components/schemas/Page'
+        - type: object
+          properties:
+            stores:
+              type: array
+              items:
+                $ref: '#/components/schemas/Store'
+
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Basic Authentication

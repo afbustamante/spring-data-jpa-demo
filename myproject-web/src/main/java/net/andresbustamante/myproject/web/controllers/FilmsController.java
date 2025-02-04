@@ -1,39 +1,50 @@
 package net.andresbustamante.myproject.web.controllers;
 
-import static org.springframework.http.MediaType.*;
-
 import java.time.Year;
 import java.util.Collection;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import jakarta.servlet.http.HttpServletRequest;
 import net.andresbustamante.myproject.api.model.FilmItemDto;
 import net.andresbustamante.myproject.api.model.FilmSearchDto;
 import net.andresbustamante.myproject.api.services.FilmSearchService;
+import net.andresbustamante.myproject.web.dto.FilmPage;
+import net.andresbustamante.myproject.web.dto.FilmRating;
+import net.andresbustamante.myproject.web.mappers.FilmDtoMapper;
 
 @RestController
-@RequestMapping("/api/films")
-public class FilmsController {
+@RequestMapping("/api")
+public class FilmsController extends AbstractController implements FilmsApi {
 
     private final FilmSearchService filmSearchService;
+    private final FilmDtoMapper filmDtoMapper;
 
-    public FilmsController(final FilmSearchService filmSearchService) {
+    public FilmsController(final ObjectMapper objectMapper, final HttpServletRequest request,
+            final FilmSearchService filmSearchService, final FilmDtoMapper filmDtoMapper) {
+        super(objectMapper, request);
         this.filmSearchService = filmSearchService;
+        this.filmDtoMapper = filmDtoMapper;
     }
 
-    @GetMapping(produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<Collection<FilmItemDto>> findFilms(
-            @RequestParam(name = "title", required = false) final String title,
-            @RequestParam(name = "year", required = false) final Short year,
-            @RequestParam(name = "rating", required = false) final String rating,
-            @RequestParam(name = "lang_id", required = false) final Short languageId) {
+    @Override
+    public ResponseEntity<FilmPage> findFilms(final String title, final Integer year, final FilmRating rating,
+            final String language) {
         Year releaseYear = year != null ? Year.of(year) : null;
-        FilmSearchDto criteria = new FilmSearchDto(title, releaseYear, rating, languageId);
+        FilmSearchDto criteria = new FilmSearchDto(title, releaseYear, rating.toString(), language);
 
-        return ResponseEntity.ok(filmSearchService.findFilms(criteria));
+        Collection<FilmItemDto> films = filmSearchService.findFilms(criteria);
+
+        FilmPage filmPage = new FilmPage();
+        filmPage.setPage(0);
+        filmPage.setNumberOfElements(films.size());
+        filmPage.setTotalElements(films.size());
+        filmPage.setFilms(filmDtoMapper.map(films));
+
+        return ResponseEntity.ok(filmPage);
     }
 }

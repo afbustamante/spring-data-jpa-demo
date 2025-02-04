@@ -40,9 +40,9 @@ public class FilmSearchSpecification implements Specification<Film> {
             predicates.add(criteriaBuilder.equal(root.get("rating"), criteria.rating()));
         }
 
-        if (criteria.languageId() != null) {
+        if (criteria.language() != null) {
             Join<Film, Language> languageJoin = root.join("language");
-            predicates.add(criteriaBuilder.equal(languageJoin.get("id"), criteria.languageId()));
+            predicates.add(criteriaBuilder.equal(languageJoin.get("name"), criteria.language()));
         }
 
         return predicates.stream().reduce(criteriaBuilder::and).orElse(null);
