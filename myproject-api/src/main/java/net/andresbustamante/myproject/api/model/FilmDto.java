@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class FilmItemDto {
+public class FilmDto {
 
     private Short id;
     private String title;

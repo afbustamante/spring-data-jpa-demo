@@ -7,7 +7,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import net.andresbustamante.myproject.api.model.FilmItemDto;
+import net.andresbustamante.myproject.api.model.FilmDto;
 import net.andresbustamante.myproject.api.model.FilmSearchDto;
 import net.andresbustamante.myproject.api.services.FilmSearchService;
 import net.andresbustamante.myproject.core.dao.FilmDao;
@@ -28,7 +28,7 @@ public class FilmSearchServiceImpl implements FilmSearchService {
     }
 
     @Override
-    public Collection<FilmItemDto> findFilms(final FilmSearchDto criteria) {
+    public Collection<FilmDto> findFilms(final FilmSearchDto criteria) {
         List<Film> films = criteria.isEmpty() ? filmDao.findAll() : filmDao.findAll(
                 new FilmSearchSpecification(criteria), Sort.by("title"));
         return filmMapper.map(films);

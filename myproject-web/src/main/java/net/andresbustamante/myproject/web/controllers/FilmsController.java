@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.servlet.http.HttpServletRequest;
-import net.andresbustamante.myproject.api.model.FilmItemDto;
+import net.andresbustamante.myproject.api.model.FilmDto;
 import net.andresbustamante.myproject.api.model.FilmSearchDto;
 import net.andresbustamante.myproject.api.services.FilmSearchService;
 import net.andresbustamante.myproject.web.dto.FilmPage;
@@ -37,7 +37,7 @@ public class FilmsController extends AbstractController implements FilmsApi {
         Year releaseYear = year != null ? Year.of(year) : null;
         FilmSearchDto criteria = new FilmSearchDto(title, releaseYear, rating.toString(), language);
 
-        Collection<FilmItemDto> films = filmSearchService.findFilms(criteria);
+        Collection<FilmDto> films = filmSearchService.findFilms(criteria);
 
         FilmPage filmPage = new FilmPage();
         filmPage.setPage(0);
