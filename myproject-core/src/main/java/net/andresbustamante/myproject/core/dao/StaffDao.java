@@ -21,7 +21,7 @@ public interface StaffDao extends JpaRepository<Staff, Short> {
             INNER JOIN s.address a
             INNER JOIN a.city c
             INNER JOIN c.country k
-            WHERE s.active IS true
+            WHERE s.active = true
             """)
     List<StaffProjection> findAllActives();
 
@@ -30,7 +30,7 @@ public interface StaffDao extends JpaRepository<Staff, Short> {
             INNER JOIN FETCH s.address a
             INNER JOIN FETCH a.city c
             INNER JOIN FETCH c.country k
-            WHERE s.active IS true
+            WHERE s.active = true
             """)
     List<Staff> findAllActiveStaff();
 
