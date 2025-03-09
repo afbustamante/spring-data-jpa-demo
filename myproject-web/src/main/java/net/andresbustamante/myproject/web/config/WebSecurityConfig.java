@@ -45,6 +45,6 @@ public class WebSecurityConfig {
     @Bean
     @Profile("h2")
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().requestMatchers("/h2-console/**", "/error");
+        return web -> web.ignoring().requestMatchers("/h2-console/**", "/error");
     }
 }
