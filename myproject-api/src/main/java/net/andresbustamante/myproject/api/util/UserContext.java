@@ -1,6 +1,13 @@
 package net.andresbustamante.myproject.api.util;
 
-public interface UserContext {
+import lombok.Getter;
 
-    String getUsername();
+@Getter
+public class UserContext {
+
+    private final String username;
+
+    public UserContext(final String username) {
+        this.username = username;
+    }
 }

@@ -2,17 +2,11 @@ package net.andresbustamante.myproject.web.controllers;
 
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
+import jakarta.servlet.http.HttpServletRequest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import jakarta.servlet.http.HttpServletRequest;
-
 public abstract class AbstractController {
-
-    @Autowired
-    protected ApplicationContext applicationContext;
 
     private final ObjectMapper objectMapper;
     private final HttpServletRequest request;
