@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,13 +29,13 @@ class StaffSearchServiceImplTest {
     @Test
     void testFetchActiveStaff() {
         when(staffDao.findAllActiveStaff()).thenReturn(new ArrayList<>());
-        when(staffMapper.map(any(Collection.class))).thenReturn(new ArrayList<>());
+        when(staffMapper.map(anyCollection())).thenReturn(new ArrayList<>());
 
         var result = staffSearchService.fetchActiveStaff();
 
         assertNotNull(result);
 
         verify(staffDao).findAllActiveStaff();
-        verify(staffMapper).map(any(Collection.class));
+        verify(staffMapper).map(anyCollection());
     }
 }

@@ -2,7 +2,6 @@ package net.andresbustamante.myproject.core.util;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.data.jpa.domain.Specification;
 
