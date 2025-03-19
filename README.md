@@ -6,12 +6,12 @@ Here it is the [database model](https://dev.mysql.com/doc/sakila/en/sakila-struc
 
 This project uses:
 
-- Spring Boot 3.3
-- Spring Data JPA 3.3
-- Spring Framework 6.1
-- Spring Batch 5.1
-- Flyway 10.10 (only for MySQL and MariaDB)
-- Embedded H2 Database 2.2
+- Spring Boot 3.4
+- Spring Data JPA 3.4
+- Spring Framework 6.2
+- Spring Batch 5.2
+- Flyway 10.20 (only for MySQL and MariaDB)
+- Embedded H2 Database 2.3
 - Built-on Maven
 
 It requires Java 17+ and optionally a MariaDB Server 10+ / MySQL Server 8.0+ in order to deploy the application with a
