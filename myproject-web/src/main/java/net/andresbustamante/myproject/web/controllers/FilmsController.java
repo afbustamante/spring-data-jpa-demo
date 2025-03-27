@@ -35,7 +35,8 @@ public class FilmsController extends AbstractController implements FilmsApi {
     public ResponseEntity<FilmPage> findFilms(final String title, final Integer year, final FilmRating rating,
             final String language) {
         Year releaseYear = year != null ? Year.of(year) : null;
-        FilmSearchDto criteria = new FilmSearchDto(title, releaseYear, rating.toString(), language);
+        String strRating = rating != null ? rating.toString() : null;
+        FilmSearchDto criteria = new FilmSearchDto(title, releaseYear, strRating, language);
 
         Collection<FilmDto> films = filmSearchService.findFilms(criteria);
 

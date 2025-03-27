@@ -1,0 +1,5 @@
+ALTER TABLE store ADD COLUMN name VARCHAR(100);
+
+UPDATE store SET name = 'My store';
+
+ALTER TABLE store MODIFY name VARCHAR(100) NOT NULL;

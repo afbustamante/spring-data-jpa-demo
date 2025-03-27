@@ -4,7 +4,7 @@ openapi: 3.0.3
 info:
   title: My Project
   description: My Project's REST API
-  version: 1.0.0
+  version: v1
 
 servers:
   - url: 'http://localhost:8000/api'
@@ -15,6 +15,7 @@ tags:
   - name: countries
   - name: films
   - name: staff
+  - name: stores
 
 paths:
   /categories:
@@ -370,7 +371,7 @@ components:
           format: email
         password:
           type: string
-          format: base64
+          format: password
         address:
           $ref: '#/components/schemas/AddressForm'
         store_id:
@@ -396,8 +397,12 @@ components:
       properties:
         id:
           type: integer
+        name:
+          type: string
         manager_name:
           type: string
+        address:
+          $ref: '#/components/schemas/Address'
 
     StorePage:
       allOf:

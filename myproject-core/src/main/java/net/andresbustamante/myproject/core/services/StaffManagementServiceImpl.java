@@ -1,8 +1,10 @@
 package net.andresbustamante.myproject.core.services;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import lombok.extern.slf4j.Slf4j;
 import net.andresbustamante.myproject.api.model.StaffCreationDto;
 import net.andresbustamante.myproject.api.services.AddressManagementService;
 import net.andresbustamante.myproject.api.services.StaffManagementService;
@@ -14,19 +16,22 @@ import net.andresbustamante.myproject.core.entities.Staff;
 import net.andresbustamante.myproject.core.entities.Store;
 
 @Service
+@Slf4j
 public class StaffManagementServiceImpl implements StaffManagementService {
 
     private final StaffDao staffDao;
     private final AddressManagementService addressManagementService;
     private final AddressDao addressDao;
     private final StoreDao storeDao;
+    private final PasswordEncoder passwordEncoder;
 
     public StaffManagementServiceImpl(StaffDao staffDao, AddressManagementService addressManagementService,
-            AddressDao addressDao, StoreDao storeDao) {
+            AddressDao addressDao, StoreDao storeDao, PasswordEncoder passwordEncoder) {
         this.staffDao = staffDao;
         this.addressManagementService = addressManagementService;
         this.addressDao = addressDao;
         this.storeDao = storeDao;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -37,7 +42,7 @@ public class StaffManagementServiceImpl implements StaffManagementService {
         newStaff.setLastName(staff.lastName());
         newStaff.setEmail(staff.email());
         newStaff.setUsername(staff.username());
-        newStaff.setPassword(staff.password());
+        newStaff.setPassword(passwordEncoder.encode(staff.password()));
 
         Store store = storeDao.getReferenceById(staff.storeId());
 
@@ -49,6 +54,8 @@ public class StaffManagementServiceImpl implements StaffManagementService {
         newStaff.setStore(store);
 
         newStaff = staffDao.save(newStaff);
+
+        log.info("New staff member {} created with the ID {}", newStaff.getUsername(), newStaff.getId());
 
         return newStaff.getId();
     }
