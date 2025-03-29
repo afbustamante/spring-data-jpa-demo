@@ -13,6 +13,7 @@ import net.andresbustamante.myproject.api.model.ActorDto;
 import net.andresbustamante.myproject.api.model.FilmCreationDto;
 import net.andresbustamante.myproject.api.services.ActorManagementService;
 import net.andresbustamante.myproject.api.services.FilmManagementService;
+import net.andresbustamante.myproject.api.util.UserContext;
 import net.andresbustamante.myproject.core.dao.ActorDao;
 import net.andresbustamante.myproject.core.dao.CategoryDao;
 import net.andresbustamante.myproject.core.dao.FilmDao;
@@ -50,7 +51,7 @@ public class FilmManagementServiceImpl implements FilmManagementService {
 
     @Override
     @Transactional
-    public int createFilm(final FilmCreationDto filmData) {
+    public int createFilm(final FilmCreationDto filmData, final UserContext ctx) {
         Film film = filmMapper.map(filmData);
         film.setLanguage(languageDao.getReferenceById(filmData.languageId()));
 
@@ -60,12 +61,12 @@ public class FilmManagementServiceImpl implements FilmManagementService {
 
         film = filmDao.save(film);
 
-        setFilmActors(film, filmData);
+        setFilmActors(film, filmData, ctx);
         setFilmCategories(film, filmData);
 
         film = filmDao.save(film);
 
-        log.info("New film {} created with the ID {}", film.getTitle(), film.getId());
+        log.info("New film {} created by {} with the ID {}", ctx.getUsername(), film.getTitle(), film.getId());
 
         return film.getId();
     }
@@ -83,8 +84,8 @@ public class FilmManagementServiceImpl implements FilmManagementService {
         }
     }
 
-    private void setFilmActors(final Film film, final FilmCreationDto filmData) {
-        List<Actor> actors = findOrCreateActors(filmData.actors());
+    private void setFilmActors(final Film film, final FilmCreationDto filmData, final UserContext ctx) {
+        List<Actor> actors = findOrCreateActors(filmData.actors(), ctx);
 
         for (Actor actor : actors) {
             FilmActor filmActor = new FilmActor();
@@ -96,7 +97,7 @@ public class FilmManagementServiceImpl implements FilmManagementService {
         }
     }
 
-    private List<Actor> findOrCreateActors(final Set<ActorDto> actors) {
+    private List<Actor> findOrCreateActors(final Set<ActorDto> actors, final UserContext ctx) {
         List<Short> actorsResult = new ArrayList<>();
 
         actors.forEach(actor -> {
@@ -104,7 +105,7 @@ public class FilmManagementServiceImpl implements FilmManagementService {
                 actorsResult.add(actor.getId());
             } else {
                 short id = actorManagementService.createActor(
-                        new ActorCreationDto(actor.getFirstName(), actor.getLastName()));
+                        new ActorCreationDto(actor.getFirstName(), actor.getLastName()), ctx);
 
                 actorsResult.add(id);
             }

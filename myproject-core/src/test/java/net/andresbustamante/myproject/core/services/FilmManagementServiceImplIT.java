@@ -15,6 +15,7 @@ import org.springframework.test.context.ContextConfiguration;
 import net.andresbustamante.myproject.api.model.ActorDto;
 import net.andresbustamante.myproject.api.model.FilmCreationDto;
 import net.andresbustamante.myproject.api.services.FilmManagementService;
+import net.andresbustamante.myproject.api.util.UserContext;
 import net.andresbustamante.myproject.core.config.CoreDaoTestConfig;
 import net.andresbustamante.myproject.core.config.FilmManagementServiceTestConfig;
 import net.andresbustamante.myproject.core.dao.FilmDao;
@@ -45,7 +46,7 @@ class FilmManagementServiceImplIT {
                 actors, categories, null);
 
         // When
-        int filmId = filmManagementService.createFilm(filmCreationDto);
+        int filmId = filmManagementService.createFilm(filmCreationDto, new UserContext("test"));
 
         // Then
         assertTrue(filmId > 0);

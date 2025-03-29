@@ -6,6 +6,9 @@ import jakarta.servlet.http.HttpServletRequest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import net.andresbustamante.myproject.api.util.UserContext;
+import net.andresbustamante.myproject.web.util.SecurityUtils;
+
 public abstract class AbstractController {
 
     private final ObjectMapper objectMapper;
@@ -22,5 +25,9 @@ public abstract class AbstractController {
 
     public Optional<HttpServletRequest> getRequest() {
         return Optional.of(request);
+    }
+
+    protected UserContext getUserContext() {
+        return new UserContext(SecurityUtils.getCurrentUsername(), request.getLocale());
     }
 }

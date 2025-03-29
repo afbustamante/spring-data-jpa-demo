@@ -20,6 +20,7 @@ tags:
 paths:
   /categories:
     get:
+      summary: Finds categories
       operationId: findCategories
       tags:
         - categories
@@ -39,6 +40,7 @@ paths:
 
   /countries:
     get:
+      summary: Finds countries
       operationId: findCountries
       tags:
         - countries
@@ -58,6 +60,7 @@ paths:
 
   /countries/{id}/cities:
     get:
+      summary: Finds cities in a country
       operationId: findCitiesByCountry
       tags:
         - countries
@@ -84,6 +87,7 @@ paths:
 
   /films:
     get:
+      summary: Finds films
       operationId: findFilms
       parameters:
         - name: title
@@ -124,6 +128,7 @@ paths:
 
   /staff:
     get:
+      summary: Finds staff members
       operationId: findStaff
       tags:
         - staff
@@ -141,6 +146,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
     post:
+      summary: Creates a new staff member
       operationId: createStaff
       tags:
         - staff
@@ -152,6 +158,12 @@ paths:
       responses:
         201:
           description: Created
+        400:
+          description: Bad request. The staff data is not valid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
         500:
           description: Internal server error
           content:
@@ -161,6 +173,7 @@ paths:
 
   /stores:
     get:
+      summary: Finds stores
       operationId: findStores
       tags:
         - stores
@@ -340,6 +353,21 @@ components:
         last_name:
           type: string
 
+    PersonForm:
+      type: object
+      properties:
+        first_name:
+          type: string
+          minLength: 2
+          maxLength: 45
+        last_name:
+          type: string
+          minLength: 2
+          maxLength: 45
+      required:
+        - first_name
+        - last_name
+
     Staff:
       allOf:
         - $ref: '#/components/schemas/Person'
@@ -356,26 +384,23 @@ components:
               $ref: '#/components/schemas/Address'
 
     StaffForm:
-      type: object
-      properties:
-        first_name:
-          type: string
-          maxLength: 45
-        last_name:
-          type: string
-          maxLength: 45
-        username:
-          type: string
-        email:
-          type: string
-          format: email
-        password:
-          type: string
-          format: password
-        address:
-          $ref: '#/components/schemas/AddressForm'
-        store_id:
-          type: integer
+      allOf:
+        - $ref: '#/components/schemas/PersonForm'
+        - type: object
+          properties:
+            username:
+              type: string
+              minLength: 3
+            email:
+              type: string
+              format: email
+            password:
+              type: string
+              format: password
+            address:
+              $ref: '#/components/schemas/AddressForm'
+            store_id:
+              type: integer
       required:
         - first_name
         - last_name

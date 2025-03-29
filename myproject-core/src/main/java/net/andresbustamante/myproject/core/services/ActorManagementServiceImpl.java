@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import net.andresbustamante.myproject.api.model.ActorCreationDto;
 import net.andresbustamante.myproject.api.services.ActorManagementService;
+import net.andresbustamante.myproject.api.util.UserContext;
 import net.andresbustamante.myproject.core.dao.ActorDao;
 import net.andresbustamante.myproject.core.entities.Actor;
 
@@ -21,14 +22,14 @@ public class ActorManagementServiceImpl implements ActorManagementService {
 
     @Override
     @Transactional
-    public short createActor(final ActorCreationDto actorData) {
+    public short createActor(final ActorCreationDto actorData, final UserContext ctx) {
         Actor actor = new Actor();
         actor.setFirstName(actorData.firstName());
         actor.setLastName(actorData.lastName());
 
         actor = actorDao.save(actor);
 
-        log.info("New actor {} {} created with the ID {}", actor.getFirstName(), actor.getLastName(), actor.getId());
+        log.info("New actor {} created by {} with the ID {}", actor.getFullName(), ctx.getUsername(), actor.getId());
 
         return actor.getId();
     }
