@@ -20,6 +20,9 @@ public interface FilmMapper {
     @Mapping(target = "lastUpdate", ignore = true)
     @Mapping(target = "filmActors", ignore = true)
     @Mapping(target = "filmCategories", ignore = true)
+    @Mapping(target = "creator", ignore = true)
+    @Mapping(target = "creationDate", ignore = true)
+    @Mapping(target = "lastEditor", ignore = true)
     Film map(FilmCreationDto creationDto);
 
     FilmDto map(Film film);

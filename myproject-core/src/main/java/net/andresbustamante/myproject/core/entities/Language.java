@@ -1,7 +1,5 @@
 package net.andresbustamante.myproject.core.entities;
 
-import java.io.Serializable;
-import java.time.Instant;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
@@ -13,6 +11,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.annotation.Immutable;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -22,9 +21,10 @@ import lombok.Setter;
         @UniqueConstraint(name = "uc_language_name", columnNames = "name")
 })
 @Cacheable(cacheNames = "languages")
+@Immutable
 @Getter
 @Setter
-public class Language implements Serializable {
+public class Language extends AuditableEntity {
 
     @Id
     @Column(name = "language_id")
@@ -33,10 +33,6 @@ public class Language implements Serializable {
     @Size(max = 20)
     @NotNull
     private String name;
-
-    @NotNull
-    @Column(name = "last_update")
-    private Instant lastUpdate;
 
     @Override
     public boolean equals(final Object o) {

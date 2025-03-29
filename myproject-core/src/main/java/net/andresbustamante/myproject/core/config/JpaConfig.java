@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableJpaRepositories(value = "net.andresbustamante.myproject.core.dao")
-@EnableJpaAuditing(auditorAwareRef = "auditorAware", modifyOnCreate = false)
+@EnableJpaAuditing(auditorAwareRef = "auditorAware")
 @EnableTransactionManagement
 public class JpaConfig {
 

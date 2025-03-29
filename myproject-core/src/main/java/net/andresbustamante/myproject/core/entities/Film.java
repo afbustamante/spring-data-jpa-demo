@@ -1,8 +1,6 @@
 package net.andresbustamante.myproject.core.entities;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.Instant;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -10,7 +8,6 @@ import java.util.Set;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,10 +22,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -36,10 +29,9 @@ import lombok.Setter;
 @Table(name = "film", uniqueConstraints = {
         @UniqueConstraint(name = "uc_film_title_year", columnNames = {"title", "release_year", "length"})
 })
-@EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
-public class Film implements Serializable {
+public class Film extends AuditableEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -85,12 +77,6 @@ public class Film implements Serializable {
     @Lob
     @Column(name = "special_features")
     private String specialFeatures;
-
-    @CreatedDate
-    @LastModifiedDate
-    @NotNull
-    @Column(name = "last_update")
-    private Instant lastUpdate;
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "film")
     private Set<FilmActor> filmActors;

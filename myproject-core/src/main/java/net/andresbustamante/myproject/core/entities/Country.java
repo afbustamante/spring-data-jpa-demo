@@ -1,7 +1,5 @@
 package net.andresbustamante.myproject.core.entities;
 
-import java.io.Serializable;
-import java.time.Instant;
 import java.util.Objects;
 import java.util.Set;
 
@@ -16,6 +14,7 @@ import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotNull;
 
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.annotation.Immutable;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -25,9 +24,10 @@ import lombok.Setter;
         @UniqueConstraint(name = "uc_country_name", columnNames = "country")
 })
 @Cacheable(cacheNames = "countries")
+@Immutable
 @Getter
 @Setter
-public class Country implements Serializable {
+public class Country extends AuditableEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,9 +37,6 @@ public class Country implements Serializable {
     @NotNull
     @Column(name = "country")
     private String name;
-
-    @Column(name = "last_update", nullable = false)
-    private Instant lastUpdate;
 
     @OneToMany(mappedBy = "country")
     private Set<City> cities;

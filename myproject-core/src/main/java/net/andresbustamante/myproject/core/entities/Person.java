@@ -1,7 +1,5 @@
 package net.andresbustamante.myproject.core.entities;
 
-import java.io.Serializable;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.validation.constraints.NotNull;
@@ -13,7 +11,7 @@ import lombok.Setter;
 @MappedSuperclass
 @Getter
 @Setter
-public class Person implements Serializable {
+public class Person extends AuditableEntity {
 
     @NotNull
     @Size(max = 45)

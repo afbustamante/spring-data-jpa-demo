@@ -1,13 +1,11 @@
 package net.andresbustamante.myproject.core.entities;
 
-import java.time.Instant;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -18,10 +16,6 @@ import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -29,7 +23,6 @@ import lombok.Setter;
 @Table(name = "customer", uniqueConstraints = {
         @UniqueConstraint(name = "uc_customer_email", columnNames = "email")
 })
-@EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
 public class Customer extends Person {
@@ -53,15 +46,6 @@ public class Customer extends Person {
 
     @NotNull
     private boolean active;
-
-    @CreatedDate
-    @NotNull
-    @Column(name = "create_date")
-    private Instant creationDate;
-
-    @LastModifiedDate
-    @Column(name = "last_update")
-    private Instant lastUpdate;
 
     @OneToMany(mappedBy = "customer")
     private Set<Rental> rentals;

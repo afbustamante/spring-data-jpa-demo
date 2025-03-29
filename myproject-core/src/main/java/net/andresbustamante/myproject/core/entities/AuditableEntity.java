@@ -20,7 +20,7 @@ import lombok.Setter;
 @EntityListeners(AuditingEntityListener.class)
 @Getter
 @Setter
-public abstract class AbstractAuditableEntity implements Serializable {
+public class AuditableEntity implements Serializable {
 
     @CreatedBy
     @Column(name = "created_by", nullable = false, updatable = false)
@@ -32,9 +32,9 @@ public abstract class AbstractAuditableEntity implements Serializable {
 
     @LastModifiedBy
     @Column(name = "modified_by")
-    private String modifier;
+    private String lastEditor;
 
     @LastModifiedDate
-    @Column(name = "modified_at")
-    private Instant modificationDate;
+    @Column(name = "last_update")
+    private Instant lastUpdate;
 }
