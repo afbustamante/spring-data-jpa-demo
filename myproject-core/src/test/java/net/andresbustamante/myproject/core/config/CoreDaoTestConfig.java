@@ -7,9 +7,9 @@ import org.springframework.context.annotation.Import;
 
 @SpringBootConfiguration
 @EnableAutoConfiguration
-@Import({
+@Import(
         JpaConfig.class
-})
+)
 @EntityScan(basePackages = "net.andresbustamante.myproject.core.entities")
 public class CoreDaoTestConfig {
 }

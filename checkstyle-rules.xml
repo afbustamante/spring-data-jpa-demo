@@ -47,8 +47,9 @@
     <module name="ClassTypeParameterName"/>
     <module name="IllegalIdentifierName"/>
     <module name="InterfaceTypeParameterName"/>
+    <module name="AbbreviationAsWordInName"/>
 
-    <!-- Bad pratiques -->
+    <!-- Bad practices -->
     <module name="StringLiteralEquality"/>
     <module name="EqualsAvoidNull"/>
     <module name="EmptyBlock"/>
@@ -63,8 +64,6 @@
     <module name="UnusedLocalVariable"/>
     <module name="NoArrayTrailingComma"/>
     <module name="AvoidNoArgumentSuperConstructorCall"/>
-    <module name="InterfaceIsType"/>
-    <module name="OneTopLevelClass"/>
     <module name="ArrayTypeStyle"/>
     <module name="ModifierOrder"/>
     <module name="RedundantModifier"/>
@@ -89,5 +88,28 @@
     <module name="DefaultComesLast"/>
     <module name="ModifiedControlVariable"/>
     <module name="UpperEll"/>
+    <module name="HiddenField">
+      <property name="ignoreConstructorParameter" value="true"/>
+    </module>
+
+    <!-- Checks for class design -->
+    <module name="DeclarationOrder"/>
+    <module name="FinalClass"/>
+    <module name="InterfaceIsType"/>
+    <module name="VisibilityModifier"/>
+    <module name="InnerTypeLast"/>
+    <module name="MutableException"/>
+    <module name="OneTopLevelClass"/>
+    <module name="ThrowsCount"/>
+
+    <!-- Annotations -->
+    <module name="MissingOverride"/>
+    <module name="MissingDeprecated"/>
+    <module name="AnnotationUseStyle"/>
+
+    <!-- Metrics -->
+    <module name="BooleanExpressionComplexity"/>
+    <module name="CyclomaticComplexity"/>
+    <module name="JavaNCSS"/>
   </module>
 </module>
