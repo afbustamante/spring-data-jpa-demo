@@ -11,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotNull;
 
 import lombok.Getter;
@@ -28,12 +29,12 @@ public class Payment extends AuditableEntity {
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "customer_id", nullable = false)
+    @JoinColumn(name = "customer_id")
     private Customer customer;
 
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "staff_id", nullable = false)
+    @JoinColumn(name = "staff_id")
     private Staff staff;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -41,6 +42,7 @@ public class Payment extends AuditableEntity {
     private Rental rental;
 
     @NotNull
+    @Digits(integer = 3, fraction = 2)
     @Column(name = "amount", precision = 5, scale = 2)
     private BigDecimal amount;
 

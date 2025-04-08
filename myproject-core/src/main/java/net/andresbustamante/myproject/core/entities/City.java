@@ -14,6 +14,7 @@ import jakarta.persistence.UniqueConstraint;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.annotation.Immutable;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -35,7 +36,8 @@ public class City extends AuditableEntity {
     @Column(name = "city")
     private String name;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "country_id", nullable = false)
+    @JoinColumn(name = "country_id")
     private Country country;
 }

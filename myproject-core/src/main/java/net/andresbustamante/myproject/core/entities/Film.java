@@ -18,6 +18,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
+import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -62,16 +63,18 @@ public class Film extends AuditableEntity {
     private Short rentalDuration;
 
     @NotNull
+    @Digits(integer = 2, fraction = 2)
     @Column(name = "rental_rate", precision = 4, scale = 2)
     private BigDecimal rentalRate;
 
     private Short length;
 
     @NotNull
+    @Digits(integer = 3, fraction = 2)
     @Column(name = "replacement_cost", precision = 5, scale = 2)
     private BigDecimal replacementCost;
 
-    @Pattern(regexp = "^(G|PG|PG-13|R|NC-17)$", message = "Invalid rating")
+    @Pattern(regexp = "^(G|PG|PG-13|R|NC-17)$", message = "{app.jpa.validations.errors.film.rating.invalid}")
     private String rating;
 
     @Lob

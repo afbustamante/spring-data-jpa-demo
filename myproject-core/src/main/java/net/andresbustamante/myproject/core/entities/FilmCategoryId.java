@@ -6,6 +6,7 @@ import java.util.Objects;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,10 +19,12 @@ import lombok.Setter;
 @Setter
 public class FilmCategoryId implements Serializable {
 
-    @Column(name = "film_id", nullable = false)
+    @NotNull
+    @Column(name = "film_id")
     private Integer filmId;
 
-    @Column(name = "category_id", nullable = false)
+    @NotNull
+    @Column(name = "category_id")
     private Byte categoryId;
 
     @Override

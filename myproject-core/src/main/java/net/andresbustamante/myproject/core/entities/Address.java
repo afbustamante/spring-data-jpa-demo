@@ -25,7 +25,8 @@ public class Address extends AuditableEntity {
     @Column(name = "address_id", nullable = false)
     private Short id;
 
-    @Column(name = "address", nullable = false)
+    @NotNull
+    @Column(name = "address")
     private String line1;
 
     @Column(name = "address2")
@@ -38,7 +39,8 @@ public class Address extends AuditableEntity {
     @JoinColumn(name = "city_id")
     private City city;
 
-    @Column(name = "postal_code", nullable = false)
+    @NotNull
+    @Column(name = "postal_code")
     private String postalCode;
 
     @Column(name = "phone")

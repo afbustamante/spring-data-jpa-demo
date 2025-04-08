@@ -406,6 +406,9 @@ components:
         - last_name
         - username
         - email
+        - password
+        - address
+        - store_id
 
     StaffPage:
       allOf:

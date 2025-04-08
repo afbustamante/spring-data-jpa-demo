@@ -6,6 +6,7 @@ import java.util.Objects;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,10 +19,12 @@ import lombok.Setter;
 @Setter
 public class FilmActorId implements Serializable {
 
-    @Column(name = "actor_id", nullable = false)
+    @NotNull
+    @Column(name = "actor_id")
     private Short actorId;
 
-    @Column(name = "film_id", nullable = false)
+    @NotNull
+    @Column(name = "film_id")
     private Integer filmId;
 
     @Override
