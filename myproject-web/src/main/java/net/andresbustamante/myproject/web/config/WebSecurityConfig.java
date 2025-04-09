@@ -38,10 +38,16 @@ public class WebSecurityConfig {
                 .authenticationProvider(authenticationProvider)
                 .authorizeHttpRequests(authz -> authz
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/stores").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/countries").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/countries/**").permitAll()
-                        .requestMatchers(new String[]{"/login", "/error"}).permitAll()
+                        .requestMatchers(HttpMethod.GET,
+                                "/api/stores",                         // Stores API
+                                "/api/countries", "/api/countries/**", // Geographical zones API
+                                "/api/languages", "/api/categories"    // Languages and categories API
+                        ).permitAll()
+                        .requestMatchers(
+                                "/login", "/error",             // Spring default pages
+                                "/actuator", "/actuator/**",    // Actuator
+                                "/monitoring", "/monitoring/**" // JavaMelody
+                        ).permitAll()
                         .anyRequest().authenticated());
         return http.build();
     }
@@ -54,6 +60,6 @@ public class WebSecurityConfig {
     @Bean
     @Profile("h2")
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return web -> web.ignoring().requestMatchers("/h2-console/**", "/error");
+        return web -> web.ignoring().requestMatchers("/h2-console/**", "/error", "/actuator", "/actuator/**");
     }
 }
