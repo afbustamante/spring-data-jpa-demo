@@ -1,10 +1,5 @@
 pipeline {
-    agent any
-
-    tools {
-        jdk 'JDK-17'
-        maven 'Maven-3.9'
-    }
+    agent none
 
     options {
         timeout(time: 30, unit: 'MINUTES')
@@ -15,6 +10,13 @@ pipeline {
 
     stages {
         stage('Prepare') {
+            agent {
+                docker {
+                    image 'maven:3.9-ibm-semeru-17-noble'
+                    args '-v $HOME/.m2:/root/.m2'
+                    reuseNode true
+                }
+            }
             steps {
                 // Get code from GitHub repository
                 echo 'Pulling branch ' + env.GIT_BRANCH
@@ -22,12 +24,26 @@ pipeline {
             }
         }
         stage('Build') {
+            agent {
+                docker {
+                    image 'maven:3.9-ibm-semeru-17-noble'
+                    args '-v $HOME/.m2:/root/.m2'
+                    reuseNode true
+                }
+            }
             steps {
                 // Run the maven build
                 sh 'mvn compile'
             }
         }
         stage('Test (UT)') {
+            agent {
+                docker {
+                    image 'maven:3.9-ibm-semeru-17-noble'
+                    args '-v $HOME/.m2:/root/.m2'
+                    reuseNode true
+                }
+            }
             steps {
                 // Run the maven build with tests
                 sh 'mvn test'
@@ -39,6 +55,13 @@ pipeline {
             }
         }
         stage('Test (IT)') {
+            agent {
+                docker {
+                    image 'maven:3.9-ibm-semeru-17-noble'
+                    args '-v $HOME/.m2:/root/.m2'
+                    reuseNode true
+                }
+            }
             steps {
                 // Run the maven build with integration tests
                 sh 'mvn verify'
@@ -50,6 +73,13 @@ pipeline {
             }
         }
         stage('Report') {
+            agent {
+                docker {
+                    image 'maven:3.9-ibm-semeru-17-noble'
+                    args '-v $HOME/.m2:/root/.m2'
+                    reuseNode true
+                }
+            }
             steps {
                 script {
                     sh 'mvn site'
@@ -62,6 +92,13 @@ pipeline {
             }
         }
         stage('Analyze') {
+            agent {
+                docker {
+                    image 'maven:3.9-ibm-semeru-17-noble'
+                    args '-v $HOME/.m2:/root/.m2'
+                    reuseNode true
+                }
+            }
             steps {
                 script {
                     if (env.BRANCH_NAME == 'develop') {
