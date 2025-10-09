@@ -2,6 +2,7 @@ package net.andresbustamante.myproject.core.entities;
 
 import java.util.Objects;
 
+import jakarta.persistence.Cacheable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -10,8 +11,9 @@ import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.annotation.Immutable;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Immutable;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -20,7 +22,8 @@ import lombok.Setter;
 @Table(name = "language", uniqueConstraints = {
         @UniqueConstraint(name = "uc_language_name", columnNames = "name")
 })
-@Cacheable(cacheNames = "languages")
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_ONLY, region = "languages")
 @Immutable
 @Getter
 @Setter

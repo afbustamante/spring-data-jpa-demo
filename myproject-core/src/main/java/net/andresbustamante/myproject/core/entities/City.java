@@ -1,5 +1,8 @@
 package net.andresbustamante.myproject.core.entities;
 
+import java.util.Objects;
+
+import jakarta.persistence.Cacheable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -10,11 +13,12 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
-
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.annotation.Immutable;
-
 import jakarta.validation.constraints.NotNull;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Immutable;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,7 +26,8 @@ import lombok.Setter;
 @Table(name = "city", uniqueConstraints = {
         @UniqueConstraint(name = "uc_city_country", columnNames = {"country_id", "city"})
 })
-@Cacheable(cacheNames = "cities")
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_ONLY, region = "cities")
 @Immutable
 @Getter
 @Setter
@@ -40,4 +45,20 @@ public class City extends AuditableEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "country_id")
     private Country country;
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof City city)) {
+            return false;
+        }
+        return Objects.equals(id, city.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 }

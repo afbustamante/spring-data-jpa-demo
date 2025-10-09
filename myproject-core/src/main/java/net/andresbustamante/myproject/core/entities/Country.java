@@ -3,6 +3,7 @@ package net.andresbustamante.myproject.core.entities;
 import java.util.Objects;
 import java.util.Set;
 
+import jakarta.persistence.Cacheable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,8 +14,9 @@ import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotNull;
 
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.annotation.Immutable;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Immutable;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -23,7 +25,8 @@ import lombok.Setter;
 @Table(name = "country", uniqueConstraints = {
         @UniqueConstraint(name = "uc_country_name", columnNames = "country")
 })
-@Cacheable(cacheNames = "countries")
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_ONLY, region = "countries")
 @Immutable
 @Getter
 @Setter
